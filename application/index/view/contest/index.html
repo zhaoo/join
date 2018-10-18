@@ -1,0 +1,61 @@
+{include file="common/header" title="$conOne.name" keywords="竞赛, 高校, 大学生, 管理系统" /}
+	<!-- 竞赛介绍 -->
+	<div id="contest-introduce" class="content-section-b" style="border-top: 0">
+		<div class="container">
+			<div class="text-center">
+				<h2>{$conOne.name}</h2>
+				<a href="{$conOne.os_url}" class="lead" style="margin-top:0;font-size: 20px">{$conOne.os_url}</a>
+				<div class="indent-two justify"><p class="lead text-left">{$conOne.introduce}</p></div>
+			</div>
+		</div>
+	</div>
+	<!-- 报名 -->
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 text-center wrap_title contest-links">
+					<h2>链接</h2>
+					<p class="lead" style="margin-top:0">Links</p>
+					<span><a class="btn btn-embossed btn-primary view" role="button" id="articles-a">文章通知</a></span> 
+					<span><a class="btn btn-embossed mybutton_standard view" role="button" id="signup-a">报名参赛</a></span> 
+			 	</div>
+			</div>
+		</div>
+	</div>
+	<!-- 展示 -->
+	<div id="screen" class="content-section-b">
+        <div class="container">
+          	<div class="row" >
+				<div class="col-md-6 col-md-offset-3 text-center wrap_title ">
+					<h2>展示</h2>
+					<p class="lead" style="margin-top:0">Exhibition</p>
+			 	</div>
+		  	</div>
+		    <div class="row wow bounceInUp" >
+            	<div id="owl-demo" class="owl-carousel">
+                    {volist name="exhibition" id="vo"}
+                        {if $vo}
+							<a href="{$vo}" class="image-link">
+								<div class="item">
+									<img  class="img-responsive img-rounded" data-original="{$vo}" alt="{$conOne.name}">
+								</div>
+							</a>
+                        {/if}
+                    {/volist}
+            	</div>       
+          	</div>
+        </div>
+	</div>
+{include file="common/footer"/}
+<script>
+	$(document).ready( function() {
+		$("#articles-a").on("click",function(){
+			window.location.href = "{:url('articles/list',array('id'=>$conOne['id']))}";
+		});
+		$("#signup-a").on("click",function(){
+			window.location.href = "{:url('signup/index',array('id'=>$conOne['id']))}";
+		});
+	});
+</script>
+</body>
+</html>

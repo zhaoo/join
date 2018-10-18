@@ -1,0 +1,140 @@
+{include file="common/header" title="报名表打印" /}
+<style>
+    .print-header {
+        text-align: center;
+        color: #000;
+    }
+    .print-header h2 {
+        font-size: 20px;
+        padding-bottom: 5px;
+    }
+    .print-header h1 {
+        font-size: 25px;
+        font-weight: bold;
+    }
+    .print-form {
+        color: #000;
+        padding-top: 20px;
+    }
+    .print-form table {
+        margin: 0 auto;
+    }
+    .print-form th {
+        height: 40px;
+        text-align: center;
+    }
+    .print-footer {
+        padding-top: 50px;
+        text-align: right;
+        padding-right: 40px;
+    }
+    .print-footer span {
+        padding-left: 30px;
+    }
+</style>
+<body class="white-bg">
+    <div class="wrapper wrapper-content p-xl">
+        <div class="content p-xl">
+            <div class="row print-header">
+                <h2>{$publish.name}</h2>
+                <h1>参赛报名表</h1>
+            </div>
+            <div class="row print-form">
+                <table border="1">
+                    <tr>
+                        <th>作品名称</th>
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr>
+                        <th>软件平台</th>
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr>
+                        <th class="col-sm-2" rowspan="6">参赛作者</th>
+                        <th class="col-sm-1">排序</th>
+                        <th class="col-sm-1">姓名</th>
+                        <th class="col-sm-2">专业班级</th>
+                        <th class="col-sm-2">学号</th>
+                        <th class="col-sm-2">联系电话</th>
+                        <th class="col-sm-2">Email</th>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th rowspan="3">指导教师</th>
+                        <th colspan="2">排序</th>
+                        <th colspan="1">姓名</th>
+                        <th colspan="1">专业</th>
+                        <th colspan="1">联系电话</th>
+                        <th colspan="1">Email</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">1</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">2</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>作品简介</th>
+                        <th colspan="6" style="height: 300px;"></th>
+                    </tr>
+                </table>
+            </div>
+            <div class="row print-footer">
+                <span>签名:________</span>
+                <span>时间:________</span>
+            </div>
+        </div>
+    </div>
+{include file="common/footer"/}
+<script>
+    window.print();
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{include file="common/header" title="招兵买马" /}
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            {volist name="user" id="vo"}
+                <div class="col-sm-4 recruit">
+                    <div class="contact-box">
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <a href="javascript:userZone({$vo.id},'{$vo.nic_name}')"><img class="img-circle m-t-xs img-responsive" src="{$vo.head}"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="div-head">
+                                <a href="javascript:userZone({$vo.id},'{$vo.nic_name}')"><h3><strong>{$vo.nic_name}</strong></h3></a>
+                                {if $vo.teacher == '指导老师'}<small><strong>{$vo.teacher}</strong></small>{/if}
+                            </div>
+                            <div class="div-label">
+                                <span class="label label-success">{$vo.function}</span>&nbsp;{$vo.speciality}
+                            </div>
+                            <div class="div-contact">
+                                <address>
+                                    <a href="tencent://message/?Menu=yes&uin={$vo.qq}"><p>QQ:&nbsp;{$vo.qq}</p></a>
+                                    <a href="javascript:wechatQrcode({$vo.id})"><p>微信:&nbsp;{$vo.wechat}</p></a>
+                                    <a href="#modal-form" data-toggle="modal" class="a-email"><p>E-mail:&nbsp;{$vo.email}</p></a>
+                                </address>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            {/volist}
+        </div>
+    </div>
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal m-t" id="mailForm" method="post" action="{:url('email/index')}">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">主题：</label>
+                            <div class="input-group col-sm-7">
+                                <input id="subject" type="text" class="form-control" name="subject" required="" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">内容：</label>
+                            <div class="input-group col-sm-7">
+                                <textarea id="body" class="form-control" name="body" required="" aria-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">收件人邮箱：</label>
+                            <div class="input-group col-sm-7">
+                                <input id="save" type="text" class="form-control" name="save" required="" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">发件人邮箱：</label>
+                            <div class="input-group col-sm-7">
+                                <input id="send_email" type="text" class="form-control" name="send_email" required="" aria-required="true" value="{$my_email}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">发件人昵称：</label>
+                            <div class="input-group col-sm-7">
+                                <input id="send_name" type="text" class="form-control" name="send_name" required="" aria-required="true" value="{$my_name}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 col-sm-offset-8">
+                                <button class="btn btn-primary" type="submit">发送</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{include file="common/footer"/}
+<script>
+    //邮件发送配置
+    var index = '';
+    function showStart(){
+        index = layer.load(0, {shade: false});
+        return true;
+    }
+    function showSuccess(res){
+        layer.ready(function(){
+            layer.close(index);
+            if(1 == res.code){
+                layer.alert(res.msg, {title: '友情提示', icon: 1, closeBtn: 0}, function(){
+                    window.location.href = res.data;
+                });
+            }else{
+                layer.msg(res.msg, {anim: 6});
+            }
+        });
+    }
+    $(document).ready(function(){
+        //邮件发送
+        var options = {
+            beforeSubmit:showStart,
+            success:showSuccess
+        };
+        $('#mailForm').submit(function(){
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+        //表单验证
+        $.validator.setDefaults({
+            highlight: function(e) {
+                $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
+            },
+            success: function(e) {
+                e.closest(".form-group").removeClass("has-error").addClass("has-success")
+            },
+            errorElement: "span",
+            errorPlacement: function(e, r) {
+                e.appendTo(r.is(":radio") || r.is(":checkbox") ? r.parent().parent().parent() : r.parent())
+            },
+            errorClass: "help-block m-b-none",
+            validClass: "help-block m-b-none"
+        });
+        //收件人邮箱填充
+        $('.a-email').on('click',function(){
+            var email = $(this).find('p').html().slice(13);
+            $('#save').val(email);
+        })
+        //动画效果
+        $('.contact-box').each(function(){
+            animationHover(this, 'pulse');
+        });
+    });
+    function userZone(id,nic_name){
+        parent.layer.open({
+            type: 2,
+            title: false,
+            closeBtn: false,
+            shade: [0],
+            area: ['340px', '215px'],
+            offset: 'rb',
+            time: 500,
+            shift: 2,
+            content: ['/admin/zone/index/id/'+id, 'no'],
+            end: function(){
+                parent.layer.open({
+                    type: 2,
+                    title: nic_name,
+                    shadeClose: true,
+                    shade: false,
+                    maxmin: true, 
+                    area: ['400px', '600px'],
+                    content: '/admin/zone/index/id/'+id
+                });
+            }
+        });
+    }
+    function wechatQrcode(id){
+        layer.open({
+          type: 1,
+          title: false,
+          closeBtn: 0,
+          area: '430',
+          skin: 'layui-layer-nobg',
+          shadeClose: true,
+          content: $('#wechat-qrcode-'+id)
+        });
+    }
+</script>
+</body>
+{volist name="user" id="vo"}<img src="{$vo.wechat_qrcode}" id="wechat-qrcode-{$vo.id}" border="0" style="display:none;width:auto;height:auto;max-width:200px;max-height:200px;">{/volist}
+</html>

@@ -1,0 +1,107 @@
+{include file="common/header" title="任务" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>任务</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="form-group clearfix col-sm-1">
+                {if authCheck('task/taskadd')}
+                    <a href="{:url('taskadd',array('uid'=>$uid,'gid'=>$gid))}"><button class="btn btn-outline btn-primary" type="button">添加任务</button></a>
+                {/if}
+            </div>
+            <form id='commentForm' role="form" method="post" class="form-inline pull-right">
+                <input type="hidden" id="uid" value="{$uid}"/>
+                <input type="hidden" id="gid" value="{$gid}"/>
+                <div class="content clearfix m-b">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="输入任务标题">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="button" style="margin-top:5px" id="search"><strong>搜 索</strong></button>
+                    </div>
+                </div>
+            </form>
+            <div class="example-wrap">
+                <div class="example">
+                    <table id="taskTable">
+                        <thead>
+                        <th data-field="id">ID</th>
+                        <th data-field="name">名称</th>
+                        <th data-field="intro">描述</th>
+                        <th data-field="complete">完成情况</th>
+                        <th data-field="have_time">剩余时间</th>
+                        <th data-field="start_time">开始时间</th>
+                        <th data-field="complete_time">截止时间</th>
+                        <th data-field="operate">操作</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{include file="common/footer"/}
+<script type="text/javascript">
+    function initTable() {
+        $('#taskTable').bootstrapTable('destroy');
+        $("#taskTable").bootstrapTable({
+            method: "get",
+            url: "{:url('task/index')}",
+            striped: true,
+            pagination: true,
+            pageSize: 10,
+            pageNumber:1,
+            pageList: [5, 10, 15, 20, 25],
+            sidePagination: "server",
+            paginationFirstText: "首页",
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",
+            paginationLastText: "尾页",
+            queryParamsType : "undefined",
+            queryParams: function queryParams(params) {
+                var param = {
+                    pageNumber: params.pageNumber,
+                    pageSize: params.pageSize,
+                    searchText:$('#name').val(),
+                    uid:$('#uid').val(),
+                    gid:$('#gid').val(),
+                };
+                return param;
+            },
+            onLoadSuccess: function(res){
+                if(111 == res.code){
+                    window.location.reload();
+                }
+                layer.msg("加载成功", {time : 1000});
+            },
+            onLoadError: function(){
+                layer.msg("加载数据失败");
+            }
+        });
+    }
+    $(document).ready(function () {
+        initTable();
+        $("#search").bind("click", initTable);
+    });
+    function taskDel(id){
+        layer.confirm('确认删除此任务?', {icon: 3, title:'提示'}, function(index){
+            $.getJSON("{:url('task/taskDel')}", {'id' : id}, function(res){
+                if(1 == res.code){
+                    layer.alert(res.msg, {title: '友情提示', icon: 1, closeBtn: 0}, function(){
+                        initTable();
+                    });
+                }else if(111 == res.code){
+                    window.location.reload();
+                }else{
+                    layer.alert(res.msg, {title: '友情提示', icon: 2});
+                }
+            });
+            layer.close(index);
+        })
+    }
+</script>
+</body>
+</html>

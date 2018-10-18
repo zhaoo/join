@@ -1,0 +1,52 @@
+{include file="common/header" title="登录超时" /}
+<script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+<body class="gray-bg">
+    <div class="lock-word animated fadeInDown">
+    </div>
+    <div class="middle-box text-center lockscreen animated fadeInDown">
+        <div>
+            <div class="m-b-md">
+                <img alt="image" class="img-circle circle-border" src="{$user.head}">
+            </div>
+            <h3><strong>{$user.nic_name}</strong></h3>
+            <p>您需要再次输入密码</p>
+            <form class="m-t" role="form">
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="******" required="" name="password" id="password">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width" id="login_btn">登录</button>
+            </form>
+        </div>
+    </div>
+{include file="common/footer"/}
+    <script type="text/javascript">
+        document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==13){ // enter 键
+                $('#login_btn').click();
+            }
+        };
+        var lock = false;
+        $(function () {
+            $('#login_btn').click(function(){
+                if(lock){
+                    return;
+                }
+                lock = true;
+                $('#login_btn').removeClass('btn-success').addClass('btn-danger').val('登录中...');
+                var password = $('#password').val();
+                $.post("{:url('login/doLockScreen')}",{'password':password},function(data){
+                    lock = false;
+                    $('#login_btn').val('登录').removeClass('btn-danger').addClass('btn-success');
+                    if(data.code!=1){
+                        layer.msg(data.msg);
+                        return;
+                    }else{
+                        window.location.href=data.data;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

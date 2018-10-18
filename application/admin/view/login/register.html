@@ -1,0 +1,82 @@
+{include file="common/header" title="注册" /}
+<script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+                <!-- <h1 class="logo-name">＋</h1> -->
+                <img src="__IMG__/logo.png" class="logo-png">
+            </div>
+            <h3 id="err_msg">欢迎注册 {$Think.const.SYS_NAME}</h3>
+            <form class="m-t" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入用户名" required="" id="user_name">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请输入密码" required="" id="password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="请再次输入密码" required="" id="password_again">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="验证码" name="code" id="code" style="width:199px;float:left;margin-bottom:15px;"/>
+                    <img id="verify" src="{:url('checkVerify')}" onclick="javascript:this.src='{:url('checkVerify')}?tm='+Math.random();" style="cursor: pointer;border-width:1px 1px 1px 0px;border-style:solid;border-color:#e5e6e7;"/>
+                </div>
+                <div class="form-group text-left">
+                    <div class="checkbox i-checks">
+                        <label class="no-padding">
+                        <input type="checkbox" id="gvrp"><i></i> 我同意注册协议</label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary block full-width m-b" id="register_btn">注 册</button>
+                <p class="text-muted text-center">已经有账户了？<a href="{:url('login/index')}">点此登录</a>
+                </p>
+            </form>
+        </div>
+    </div>
+{include file="common/footer"/}
+    <script>
+        $(document).ready(function () {
+            //文本校验
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        //注册操作
+        document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==13){ // enter 键
+                $('#register_btn').click();
+            }
+        };
+        var lock = false;
+        $(function () {
+            $('#register_btn').click(function(){
+                if(lock){
+                    return;
+                }
+                lock = true;
+                $('#err_msg').hide();
+                $('#register_btn').removeClass('btn-success').addClass('btn-danger').val('注册中...');
+                var username = $('#user_name').val();
+                var password = $('#password').val();
+                var password_again = $('#password_again').val();
+                var code = $('#code').val();
+                $.post("{:url('login/doRegister')}",{'user_name':username,'password':password,'password_again':password_again,'code':code},function(data){
+                    lock = false;
+                    $('#register_btn').val('注册').removeClass('btn-danger').addClass('btn-success');
+                    if(data.code!=1){
+                        $('#verify').attr('src', '{:url('checkVerify')}?tm='+Math.random());
+                        $('#code').val('');
+                        $('#err_msg').show().html("<span style='color:red'>"+data.msg+"</span>");
+                        return;
+                    }else{
+                        window.location.href=data.data;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

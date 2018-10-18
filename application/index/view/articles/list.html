@@ -1,0 +1,21 @@
+{include file="common/header" title="文章" keywords="竞赛, 高校, 大学生, 管理系统" /}
+	<div class="article-list">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12  block wow bounceIn">
+					{volist name="articleList" id="vo"}
+						<div class="row article-row">
+							<div class="col-md-14 box-ct">
+								<a href="{:url('index',array('id'=>$vo['id']))}"><h3>{$vo.title}</h3></a>
+								<p>{$vo.description}</p>
+								<p class="fa fa-hashtag"><a href="{:url('list',['id'=>$vo.contest_id])}"> {$vo.contest}</a></p>&emsp;<p class="fa fa-clock-o"> {$vo.post_time}</p>&emsp;<p class="fa fa-eye">&nbsp;{$vo.pv}</p>
+							</div>
+					  	</div>
+				  	{/volist}
+			  	</div>
+		  	</div>
+		</div>
+	</div>
+{include file="common/footer"/}
+</body>
+</html>

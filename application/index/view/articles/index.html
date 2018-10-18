@@ -1,0 +1,22 @@
+{include file="common/header" title="$article.title" keywords="$article.keywords" /}
+	<!-- 文章内容 -->
+	<div id="contest-introduce" class="content-section-b" style="border-top: 0">
+		<div class="container">
+			<div class="text-center">
+				<h3>{$article.title}</h3>
+				</br>
+				<p class="fa fa-clock-o lead" style="margin-top:0;font-size:16px;"> {$article.post_time}</p>&emsp;&emsp;&emsp;<p class="fa fa-eye lead" style="margin-top:0;font-size:16px;">&nbsp;{$article.pv}</p>
+				<div class="indent-two justify"><p class="lead text-left">{$article.content}</p></div>
+			</div>
+		</div>
+	</div>
+{include file="common/footer"/}
+<!-- PV统计 -->
+<script>
+    var ajax;
+    if(window.XMLHttpRequest){ ajax = new XMLHttpRequest();}else{ ajax = new ActiveXObject('Microsoft.XMLHTTP');}
+    ajax.open('GET','/Index/Articles/addPV/id/{$article.id}',true);
+    ajax.send();
+</script>
+</body>
+</html>

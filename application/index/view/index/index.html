@@ -1,0 +1,157 @@
+{include file="common/header" title="首页" keywords="竞赛, 高校, 大学生, 管理系统" /}
+	<!-- 竞赛目录 -->
+	<div id="contest-catalog" class="content-section-b" style="border-top: 0">
+		<div class="container">
+			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>竞赛</h2>
+				<p class="lead" style="margin-top:0">Contest</p>
+			</div>
+			<div class="row">
+				{volist name="conMenu" id="vo"}
+					<div class="col-sm-4 wow fadeInDown text-center">
+					  	<a href="{:url('contest/index',array('id'=>$vo['id']))}">
+					  		<img class="cont-img" data-original="{$vo.thumbnail}" alt="{$vo.name}">
+						</a>
+					  	<h3><a href="{:url('contest/index',array('id'=>$vo['id']))}">{$vo.name}</a></h3>
+					    <p class="lead line-limit-length">{$vo.description}</p>
+					</div>
+				{/volist}
+			</div>
+			<!-- <div class="row tworow">
+				<div class="col-sm-4  wow fadeInDown text-center">
+				  <img class="rotate" src="__IMG__/icon/laptop.svg" alt="Generic placeholder image">
+				  <h3>服务外包大赛</h3>
+				  <p class="lead">Epsum factorial non deposit quid pro quo hic escorol. Olypian quarrels et gorilla congolium sic ad nauseum. </p>
+				 <p><a class="btn btn-embossed btn-primary view" role="button">了解详情</a></p>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<!-- 展示 -->
+	<div id="screen" class="content-section-b">
+        <div class="container">
+          	<div class="row" >
+				<div class="col-md-6 col-md-offset-3 text-center wrap_title ">
+					<h2>展示</h2>
+					<p class="lead" style="margin-top:0">Exhibition</p>
+			 	</div>
+		  	</div>
+		    <div class="row wow bounceInUp" >
+            	<div id="owl-demo" class="owl-carousel">
+                    {volist name="exhibition" id="vo"}
+                        {if $vo}
+							<a href="{$vo}" class="image-link">
+								<div class="item">
+									<img  class="img-responsive img-rounded" data-original="{$vo}" alt="">
+								</div>
+							</a>
+                        {/if}
+                    {/volist}
+            	</div>       
+          	</div>
+        </div>
+	</div>
+	<!-- 作品 -->
+	<div class="content-section-b"> 
+		<div class="container">
+			<div class="row" >
+				<div class="col-md-6 col-md-offset-3 text-center wrap_title ">
+					<h2>作品</h2>
+					<p class="lead" style="margin-top:0">Works</p>
+			 	</div>
+		  	</div>
+            <div class="row">
+                <div class="col-sm-6 wow fadeInLeftBig">
+                     <div id="owl-demo-1" class="owl-carousel">
+						<a href="/upload/images/contest/20180912/20180912205741.jpg" class="image-link">
+							<div class="item">
+								<img  class="img-responsive img-rounded" data-original="/upload/images/contest/20180912/20180912205741.jpg" alt="">
+							</div>
+						</a>
+						<a href="/upload/images/contest/20180912/20180912205802.jpg" class="image-link">
+							<div class="item">
+								<img  class="img-responsive img-rounded" data-original="/upload/images/contest/20180912/20180912205802.jpg" alt="">
+							</div>
+						</a>
+						<a href="/upload/images/contest/20180912/20180912205816.jpg" class="image-link">
+							<div class="item">
+								<img  class="img-responsive img-rounded" data-original="/upload/images/contest/20180912/20180912205816.jpg" alt="">
+							</div>
+						</a>
+					</div>       
+                </div>
+                <div class="col-sm-6 wow fadeInRightBig"  data-animation-delay="200">   
+                    <h3 class="section-heading">zhaooBlog</h3>
+					<div class="sub-title lead3">前端： jQuery, Bootstrap, Font Awesome, FancyBox, particles.js<br>后端： Django, django-mdeditor, markdown, Pygments</div>
+                    <p class="lead">该作品是一个极简式设计的个人博客，作品采用MTV架构实现，且全站自适应。MarkDown编辑功能可以方便用户快速排版，即时捕捉灵感。</p>
+					 <p><a class="btn btn-embossed btn-primary" href="http://zhaooblog.izhaoo.com/" role="button" target="_blank">在线预览</a> 
+					 <a class="btn btn-embossed btn-info" href="https://github.com/izhaoo/zhaooBlog" role="button" target="_blank">代码下载</a></p>
+				</div>  			
+			</div>
+        </div>
+    </div>
+	<!-- 留言 -->
+	<div class="content-section-b">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>留言</h2>
+				<p class="lead" style="margin-top:0">Comment</p>
+			</div>
+			<form id="msgForm" method="post" action="{:url('/index/index/addMsg')}">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nic_name">昵称</label>
+						<div class="input-group">
+							<input type="text" class="form-control" name="nic_name" id="nic_name" placeholder="{if !empty($session.nic_name)}{$session.nic_name}{/if}" required>
+							<span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email">E-Mail</label>
+						<div class="input-group">
+							<input type="email" class="form-control" id="email" name="email" placeholder="{if !empty($session.email)}{$session.email}{/if}" required  >
+							<span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="content">内容</label>
+						<div class="input-group">
+							<textarea name="content" id="content" class="form-control" rows="5" required></textarea>
+							<span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
+						</div>
+					</div>
+					<input type="submit" value="提交" class="btn tada btn-embossed btn-primary pull-right">
+				</div>
+			</form>
+			<hr class="featurette-divider hidden-lg">
+				<div class="col-md-5 col-md-push-1 address">
+					<address>
+					<h3>联系</h3>
+					<p class="lead">@zhaoo<br>
+					<a href="tencent://message/?Menu=yes&uin=894519210" target="_blank">QQ: 894519210</a><br>
+					<a href="mailto:izhaoo@qq.com" target="_blank">E-Mail: izhaoo@qq.com</a><br>
+					<a href="https://note.izhaoo.com" target="_blank">Blog: https://note.izhaoo.com</a></p>
+					</address>
+					<h3>分享</h3>
+					<div class="social-share row" data-sites="qq,wechat,qzone,weibo,facebook,twitter"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+{include file="common/footer"/}
+<script>
+	$(document).ready(function() {
+    var height = $(window).height();
+    $("#spig").hide();
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > height) {
+            $("#spig").fadeIn(500);
+        } else {
+            $("#spig").fadeOut(500);
+        }
+    });
+});
+</script>
+</body>
+</html>

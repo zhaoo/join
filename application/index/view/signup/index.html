@@ -1,0 +1,78 @@
+{include file="common/header" title="报名" keywords="报名参赛" /}
+	<div class="content-section-c ">
+		<div class="container">
+			<div class="row signup-row">
+			<div class="col-md-6 col-md-offset-3 text-center wrap_title white">
+				<h2>报名</h2>
+				<p class="lead" style="margin-top:0">Sign up</p>
+			</div>
+			<div class="mockup-content">
+					<div class="morph-button wow pulse morph-button-inflow morph-button-inflow-1">
+						<button type="button "><span>报名</span></button>
+						<div class="morph-content">
+							<div>
+								<div class="content-style-form content-style-form-4 ">
+									<h2 class="morph-clone">报名</h2>
+									<form id="signupForm" method="post" action="{:url('/index/signup/addSignup')}">
+										<p><label>名称</label><input id="name" name="name" type="text" placeholder="请输入作品名称" /></p>
+		                                <p><label>竞赛</label><select id="contest_id" name="contest_id">
+		                                	{if empty($thisContest)}<option value="">请选择</option>{/if}
+		                                    {if !empty($contest)}{foreach name="contest" item="vo"}
+		                                        <option value="{$vo.id}" {if (!empty($thisContest)) AND $thisContest[0]['name']==$vo.name} selected="selected" {/if}>{$vo.name}</option>
+		                                    {/foreach}{/if}
+		                                </select></p>
+		                                <p><label>团队</label><select id="group_id" name="group_id">
+		                                	{if empty($group)}<option value="">无团队</option>{/if}
+		                                    {if !empty($group)}{foreach name="group" item="vo"}
+		                                        <option value="{$vo.id}" >{$vo.name}</option>
+		                                    {/foreach}{/if}
+		                                </select></p>
+										<p><label>介绍</label><textarea id="introduce" name="introduce" type="text" style="font-size:16px;" placeholder="请输入作品介绍" /></textarea></p>
+										<p><button id="signupCmd">提交</button></p>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>	
+{include file="common/footer"/}
+<!-- 提交 -->
+<script>
+	$(document).ready( function() {
+	$("#signupCmd").on('click',function(){
+		$.ajax({ 
+	        type: "POST",   
+	        url: "/index/signup/addSignup",
+	        data: {
+	            "name":$("#name").val(),
+	            "contest_id":$("#contest_id").val(),
+	            "group_id":$("#group_id").val(),
+	            "member":$("#member").val(),
+	            "introduce":$("#introduce").val(),
+	        },
+	        success: function(res) {
+	        	layer.msg(res.msg, {anim: 6});
+	        	window.location.href = res.data;
+	        },
+	        error: function(jqXHR){     
+	           layer.msg("发生错误：" + jqXHR.status, {anim: 6});
+	        },     
+	    });
+	});
+});
+</script>
+<!-- 下拉报名表 -->
+<script>
+	UIMorphingButton.prototype._init = function() {
+		this.elH = this.el.offsetHeight;
+		this.button = this.el.querySelector( 'button' );
+		this.expanded = false;
+		this.contentEl = this.el.querySelector( '.morph-content' );
+		this._initEvents();
+	}
+</script>
+</body>
+</html>

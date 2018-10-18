@@ -1,0 +1,90 @@
+{include file="common/header" title="团队排名" /}
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>所有团队</h5>
+                        <div class="ibox-tools">
+                            <a href="{:url('group/groupAdd')}" class="btn btn-primary btn-xs">创建团队</a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="project-list">
+                            {volist name="group" id="vo"}
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <colgroup>
+                                            <col width="10%";></col>
+                                            <col width="10%";></col>
+                                            <col width="20%";></col>
+                                            <col width="30%";></col>
+                                            <col width="20%";></col>
+                                        </colgroup>
+                                        <tr>
+                                            <td class="project-title">
+                                                <a href="{:url('onegroup',array('id'=>$vo['id']))}">{$vo.name}</a>
+                                                <br/>
+                                                <small>创建于 {$vo.establish_time}</small>
+                                            </td>
+                                            <td>
+                                                <strong>完成任务: {$vo.complete_num} 个</strong>
+                                            </td>
+                                            <td class="project-completion">
+                                                    <small>当前进度： {$vo.persent_num}%</small>
+                                                    <div class="progress progress-mini">
+                                                        <div style="width: {$vo.persent_num}%;" class="progress-bar {$vo.bar_class}"></div>
+                                                    </div>
+                                            </td>
+                                            <td class="project-people">
+                                                {volist name="vo.user" id="voo"}
+                                                    <a href="javascript:userZone({$voo.id},'{$voo.nic_name}')"><img alt="member" class="img-circle" src="{$voo.head}"></a>
+                                                {/volist}
+                                            </td>
+                                            <td class="project-actions">
+                                                {if $vo.recruit==1}
+                                                    <a class="btn btn-primary btn-sm">招募中</a>
+                                                {else /}
+                                                    <a class="btn btn-warning btn-sm">已满员</a>
+                                                {/if}
+                                                <a href="{:url('onegroup',array('id'=>$vo['id']))}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 查看 </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {/volist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {include file="common/footer"/}
+    <script>
+        function userZone(id,nic_name){
+            parent.layer.open({
+                type: 2,
+                title: false,
+                closeBtn: false,
+                shade: [0],
+                area: ['340px', '215px'],
+                offset: 'rb',
+                time: 500,
+                shift: 2,
+                content: ['/admin/zone/index/id/'+id, 'no'],
+                end: function(){
+                    parent.layer.open({
+                        type: 2,
+                        title: nic_name,
+                        shadeClose: true,
+                        shade: false,
+                        maxmin: true, 
+                        area: ['400px', '600px'],
+                        content: '/admin/zone/index/id/'+id
+                    });
+                }
+            });
+        }
+    </script>
+    </body>
+</html>

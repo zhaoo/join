@@ -1,0 +1,24 @@
+{include file="common/header" title="文章" /}
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight article">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="ibox blog-article">
+                    <div class="ibox-content">
+                        <div class="pull-right">
+                            {volist name="$article.tag" id="vo"}
+                                <button class="btn btn-white btn-xs" type="button">{$vo}</button>
+                            {/volist}
+                        </div>
+                        <div class="text-center article-title">
+                            <h1 style="font-size: 40px;">{$article.title}</h1>
+                        </div>
+                        <div class="content">{$article.content}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{include file="common/footer"/}
+</body>
+</html>

@@ -1,0 +1,65 @@
+{include file="common/header" title="登录" /}
+<script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <!-- <h1 class="logo-name">+</h1> -->
+                <img src="__IMG__/logo.png" class="logo-png">
+            </div>
+            <h3 id="err_msg">欢迎使用 {$Think.const.SYS_NAME}</h3>
+            <form class="m-t" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" required="" id="user_name" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" required="" id="password" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="验证码" name="code" id="code" style="width:199px;float:left;margin-bottom:15px;"/>
+                    <img id="verify" src="{:url('checkVerify')}" onclick="javascript:this.src='{:url('checkVerify')}?tm='+Math.random();" style="cursor: pointer;border-width:1px 1px 1px 0px;border-style:solid;border-color:#e5e6e7;"/>
+                </div>
+                <button type="button" class="btn btn-primary block full-width m-b" id="login_btn">登 录</button>
+                <p class="text-muted text-center">
+                    <a href="login.html#">忘记密码</a> | <a href="{:url('login/register')}">注册账号</a> | <a href="{:url('index/index/index')}">返回首页</a>
+                </p>
+            </form>
+        </div>
+    </div>
+{include file="common/footer"/}
+    <script type="text/javascript">
+        document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==13){ // enter 键
+                $('#login_btn').click();
+            }
+        };
+        var lock = false;
+        $(function () {
+            $('#login_btn').click(function(){
+                if(lock){
+                    return;
+                }
+                lock = true;
+                $('#err_msg').hide();
+                $('#login_btn').removeClass('btn-success').addClass('btn-danger').val('登录中...');
+                var username = $('#user_name').val();
+                var password = $('#password').val();
+                var code = $('#code').val();
+                $.post("{:url('login/doLogin')}",{'user_name':username, 'password':password, 'code':code},function(data){
+                    lock = false;
+                    $('#login_btn').val('登录').removeClass('btn-danger').addClass('btn-success');
+                    if(data.code!=1){
+                        $('#verify').attr('src', '{:url('checkVerify')}?tm='+Math.random());
+                        $('#code').val('');
+                        $('#err_msg').show().html("<span style='color:red'>"+data.msg+"</span>");
+                        return;
+                    }else{
+                        window.location.href=data.data;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

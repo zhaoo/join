@@ -1,0 +1,101 @@
+<!-- 页脚 -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 copyright">
+                <h3 class="footer-title">版权所有</h3>
+                <p>地址：浙江·杭州</p>
+                <p>邮编：310023</p>
+                <p>Copyright© 2018-2018 | <a rel="license" href="https://www.izhaoo.com" target="_blank">zhaoo</a> .AllRightsReserved.</p>
+            </div>
+            <!-- /col-xs-7 -->
+            <div class="col-md-5">
+                <div class="footer-banner">
+                    <h3 class="footer-title">友情链接</h3>
+                    <ul>
+                        {volist name="links" id="vo"}
+                        <li><a href="{$vo.url}" target="_blank">{$vo.name}</a></li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="back-to-top"><i class="fa fa-chevron-up"></i></div>
+<!-- JS -->
+<script src="__JS__/jquery.js"></script>
+<script src="__JS__/jquery.lazyload.min.js"></script>
+<script src="__JS__/jquery.form.js"></script>
+<script src="__JS__/bootstrap.js"></script>
+<script src="__JS__/bootstrap-tagsinput.js"></script>
+<script src="__JS__/owl.carousel.js"></script>
+<script src="__JS__/script.js"></script>
+<script src="__JS__/stickUp.js"></script>
+<script type="text/javascript">
+jQuery(function($) {
+    $(document).ready(function() {
+        $('.navbar-default').stickUp();
+    });
+});
+</script>
+<script src="__JS__/wow.js"></script>
+<script>
+new WOW().init();
+</script>
+<script src="__JS__/classie.js"></script>
+<script src="__JS__/uiMorphingButton_inflow.js"></script>
+<script src="__JS__/jquery.magnific-popup.js"></script>
+<script src="__JS__/layer/laydate/laydate.js"></script>
+<script src="__JS__/layer/layer.min.js"></script>
+<script src="__JS__/jquery.share.min.js"></script>
+<script src="__JS__/zhaoo.js"></script>
+<!-- 浮动小人 -->
+<style>
+.spig {
+    display: block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    bottom: 400px;
+    left: 160px;
+    z-index: 9999;
+}
+
+#message {
+    color: #191919;
+    background: #ddd;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    min-height: 0.5em;
+    padding: 5px;
+    top: -60px;
+    position: absolute;
+    text-align: left;
+    width: 80px !important;
+    z-index: 10000;
+    -moz-box-shadow: 0 0 15px #eeeeee;
+    -webkit-box-shadow: 0 0 15px #eeeeee;
+    box-shadow: 0 0 15px #eeeeee;
+    outline: none;
+    font-size: 14px;
+}
+
+.mumu {
+    width: 80px;
+    height: 80px;
+    cursor: move;
+    background: url('__IMG__/spig.png') no-repeat;
+}
+</style>
+<div id="spig" class="spig">
+    <div id="message">加载中……</div>
+    <div id="mumu" class="mumu"></div>
+</div>
+<script src="__JS__/spig.js"></script>
+<script>
+    $("img").lazyload({
+        effect: "fadeIn",
+        // placeholder : "__IMG__/status.gif",
+    });
+</script>

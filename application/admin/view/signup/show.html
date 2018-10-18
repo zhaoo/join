@@ -1,0 +1,85 @@
+{include file="common/header" title="报名查看" /}
+<style>
+    .signup-show h1 {
+        font-size: 35px;
+        padding: 40px 0;
+        font-weight: 600;
+    }
+    .signup-show .item {
+        padding: 10px 0;
+    }
+    .signup-show .item h3 {
+        font-size: 20px;
+        display: inline-block;
+        font-weight: 600;
+    }
+    .signup-show .item p,
+    .signup-show .item span {
+        font-size: 20px;
+    }
+    .signup-show .item p {
+        padding: 10px 0;
+    }
+    .signup-show .member:after {
+        content: "、";
+    }
+    .signup-show .member:last-child:after {
+        display: none;
+    }
+    .signup-show .qrcode {
+
+    }
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="ibox">
+                    <div class="ibox-content signup-show">
+                        <a href="javascript:infoPrint()" id="infoBtn">
+                            <button class="btn btn-outline btn-primary" type="button">打印</button>
+                        </a>
+                        <img class="qrcode pull-right" src="{$signup.qrcode}">
+                        <div class="item">
+                            <h1>{$signup.name}</h1>
+                        </div>
+                        <div class="item">
+                            <h3>类别：</h3>
+                            <span>{$contest.name}</span>
+                        </div>
+                        <div class="item">
+                            <h3>时间：</h3>
+                            <span>{$signup.time}</span>
+                        </div>
+                        <div class="item">
+                            <h3>团队：</h3>
+                            <span>{$group.name}</span>
+                        </div>
+                        <div class="item">
+                            <h3>成员：</h3>
+                            {volist name="group.member" id="vo"}
+                                <span class="member">{$vo}</span>
+                            {/volist}
+                        </div>
+                        <div class="item">
+                            <h3>介绍：</h3>
+                            <p>{$signup.introduce}</p>
+                        </div>
+                        <div class="item">
+                            <h3>评价：</h3>
+                            <p>{$signup.evaluate}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{include file="common/footer"/}
+<script>
+    function infoPrint() {
+        $('#infoBtn').hide();
+        window.print();
+    }
+</script>
+</body>
+</html>

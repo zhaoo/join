@@ -1,0 +1,39 @@
+{include file="common/header" title="文章列表" /}
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight blog">
+        {if $isAuthor}
+            <a href="{:url('blog/articleAdd')}">
+                <button class="btn btn-outline btn-primary" type="button" style="margin-bottom: 10px;">添加文章</button>
+            </a>
+        {/if}
+        <div class="row">
+            <div class="col-lg-4">
+                {volist name="articleList" id="vo"}
+                    <div class="ibox blog-list">
+                        <div class="ibox-content">
+                            <a href="{:url('article', ['id'=>$vo.id])}" class="btn-link">
+                                <h2>{$vo.title}</h2>
+                            </a>
+                            <div class="small m-b-xs info">
+                                <span><i class="fa fa-user"></i><a href="{:url('/admin/zone/index', ['id'=>$vo.user_id])}"> {$vo.user}</a></span>
+                                <span><i class="fa fa-clock-o"></i> {$vo.post_time}</span>
+                                <span><i class="fa fa-eye"></i> {$vo.view}</span>
+                                {if $isAuthor}<span><i class="fa fa-file-text-o"></i><a href="{:url('articleedit', ['id'=>$vo.id])}"> 编辑</a></span>{/if}
+                            </div>
+                            <p>{$vo.abstract}</p>
+                            <div class="row">
+                                <div class="col-md-6 tags">
+                                    {volist name="$vo.tags" id="voo"}
+                                        <button class="btn btn-primary btn-xs" type="button">{$voo}</button>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {/volist}
+            </div>
+        </div>
+    </div>
+{include file="common/footer"/}
+</body>
+</html>

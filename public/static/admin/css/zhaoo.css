@@ -1,0 +1,175 @@
+/*全局*/
+a:hover {
+	color: #1abc9c;
+}
+
+/*选中颜色*/
+*::selection {
+    background: #1abc9c;
+    color: white;
+}
+
+*::-moz-selection {
+    background: #1abc9c;
+    color: white;
+}
+
+*::-webkit-selection {
+    background: #1abc9c;
+    color: white;
+}
+
+/*日期选择器*/
+.datepicker.dropdown-menu {
+	border-radius: 0px;
+}
+.datepicker table tr td, .datepicker table tr th {
+	border-radius: 0px;
+}
+.datepicker table tr td.active:hover, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active:focus, .datepicker table tr td.active:hover:focus, .datepicker table tr td.active.disabled:focus, .datepicker table tr td.active.disabled:hover:focus, .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active, .open .dropdown-toggle.datepicker table tr td.active, .open .dropdown-toggle.datepicker table tr td.active:hover, .open .dropdown-toggle.datepicker table tr td.active.disabled, .open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
+	border-color: #1ab394;
+	background-color: #1ab394;
+}
+
+/*标签*/
+.label {
+	font-size: 12px;
+	border-radius: 0;
+}
+.bootstrap-tagsinput {
+	border-radius: 0px;
+	border: 1px solid #e5e6e7;
+	box-shadow: none;
+}
+.badge-info, .label-info {
+	background-color: #1ab394;
+}
+
+/*个人页面*/
+.zone p {
+	margin: 5px 0;
+}
+.zone h1 {
+	text-align: center;
+	font-size: 26px;
+}
+.zone h3 {
+	margin-top: 25px;
+	font-size: 18px;
+}
+.zone .user-button {
+	margin-top: 20px;
+}
+.zone .div-img {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;  
+}
+.zone .div-label {
+	margin: 5px 0;
+}
+.modal-content {
+	border-radius: 0px;
+}
+
+/*招兵买马页面*/
+.recruit h3 {
+	font-size: 16px;
+}
+.recruit .div-label {
+	padding: 10px 0;
+}
+
+.recruit .div-head a,
+.recruit .div-head small {
+	display: inline-block;
+}
+
+/*团队页面*/
+.one-group h2 {
+	font-size: 26px;
+}
+.nav-tabs>li>a {
+	border-radius: 0px;
+}
+.well {
+	border-radius: 0px;
+}
+.one-group dd {
+	margin: 10px;
+}
+.group-msg {
+	margin-bottom: 5px;
+}
+.one-group .well {
+	font-size: 13px;
+}
+.group-body-msg {
+	padding-left: 10px;
+}
+
+/*首页消息提醒*/
+.remind-a {
+	padding: 0 0 !important;
+}
+.remind-span {
+	font-size: 12px;
+	line-height: 12px;
+}
+.add-member-a {
+	font-size: 12px !important;
+	padding: 0 0 !important;
+	margin: 0 0 !important;
+}
+.add-member-a:hover {
+	color: #1ab394;
+}
+
+/*鹰水印*/
+.eagle {
+	width: 100%;
+	height: width;
+	bottom: 0;
+}
+
+/*博客列表*/
+.blog-list .info span {
+	padding-right: 5px;
+}
+
+.blog-list .info {
+	padding: 3px 0;
+}
+
+.blog-list .tags {
+	padding-top: 10px;
+}
+
+.blog-list .tags button {
+	margin-right: 3px;
+}
+
+/*博客页面*/
+.blog-article img {
+	width: 100%;
+}
+
+/*菜单Logo*/
+.navbar-logo {
+	width: 80%;
+}
+
+/*登陆Logo*/
+.logo-png {
+	padding: 50px 0;
+}
+
+/*bootstrap-table 内容显示一行*/
+/*table{
+    table-layout:fixed;
+}
+td{  
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}*/
