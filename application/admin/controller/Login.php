@@ -139,7 +139,6 @@ class Login extends Controller
 
     // 验证码
     public function checkVerify() {
-        ob_clean();
         $verify = new Verify();
         $verify->imageH = 32;
         $verify->imageW = 100;

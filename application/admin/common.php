@@ -233,5 +233,6 @@ function getTree($pInfo, $spread = true)
         }
     }
     unset( $res );
+
     return $tree;
 }

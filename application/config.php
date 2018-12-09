@@ -11,8 +11,7 @@ return [
     'log' => [
         'type' => 'test',
     ],
-    'app_debug' => false,
-    'default_filter' => 'htmlspecialchars',
+    'app_debug' => true,
     'http_exception_template' => [   
         404 =>  APP_PATH.'admin/error/404.html',   
         500 =>  APP_PATH.'admin/error/500.html',

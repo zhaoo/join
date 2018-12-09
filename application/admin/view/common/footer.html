@@ -1,4 +1,5 @@
 <script src="__JS__/jquery.min.js?v=2.1.4"></script>
+<script src="__JS__/jquery.lazyload.min.js"></script>
 <script src="__JS__/bootstrap.min.js?v=3.3.6"></script>
 <script src="__JS__/content.min.js?v=1.0.0"></script>
 <script src="__JS__/contabs.js"></script>
@@ -27,3 +28,6 @@
 <script src="__JS__/plugins/cropper/cropper.min.js"></script>
 <script src="__JS__/hplus.min.js?v=4.1.0"></script>
 <script src="/static/common/croppic/js/croppic.min.js"></script>
+<script>
+    $("img").lazyload({effect: "fadeIn"});
+</script>
