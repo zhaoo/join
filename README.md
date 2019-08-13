@@ -10,6 +10,8 @@ College competition management system.
 * [Demo](https://join.izhaoo.com)
 * [About](https://join.izhaoo.com/index/about/index.html)
 
+![获奖证书](https://pic.izhaoo.com/77643f811db7c1483b06acf789d3ce7.jpg)
+
 # 介绍
 
 卓鹰网，高校学科竞赛管理系统，是面向高校师生的学科竞赛管理系统，旨在为高校学生构建一个在线的竞赛学习环境，促进学生参与竞赛，方便老师管理竞赛。卓鹰是英文`join`的音译，寓意着加入我们，在竞赛中学习。
