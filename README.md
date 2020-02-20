@@ -25,4 +25,4 @@
 
 ### 获奖
 
-![获奖证书](https://pic.izhaoo.com/77643f811db7c1483b06acf789d3ce7.jpg)
+![获奖证书](http://qiniu.izhaoo.com/77643f811db7c1483b06acf789d3ce7.jpg)
